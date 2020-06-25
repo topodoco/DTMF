@@ -1,23 +1,21 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-import scipy.io as sio
+import scipy.io.wavfile as wav
 import numpy as np
 import matplotlib.pyplot as plt
 #import time
 
 def Print_Graph(filename):
     print(filename)
-    samplerate, data = sio.wavfile.read(filename)
-
-    print(f"number of channels = {data.shape[1]}")
+    samplerate, data = wav.read(filename)
 
     length = data.shape[0] / samplerate
     print(f"length = {length}s")
 
     time = np.linspace(0., length, data.shape[0])
-    plt.plot(time, data[:, 0], label = "Left channel")
-    plt.plot(time, data[:, 1], label = "Rigth channel")
+    print(time)
+    plt.plot(time, data, label = "Sound Wave")
     plt.legend()
     plt.xlabel("time[s]")
     plt.ylabel("Amplitude")
