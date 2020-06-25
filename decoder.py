@@ -13,7 +13,7 @@ def Print_Graph(filename):
     print(f"number of channels = {data.shape[1]}")
 
     length = data.shape[0] / samplerate
-    print(f"length = {Length}s")
+    print(f"length = {length}s")
 
     time = np.linspace(0., length, data.shape[0])
     plt.plot(time, data[:, 0], label = "Left channel")
