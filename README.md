@@ -1,7 +1,7 @@
 # Dual-tone nulti-frequency Decoder
 
-This is a Dual-tone multi-frequency (DTMF) decoder that takes one (.wav)
-8bits sound and print on standard output all numbers that it contains.
+This is a Dual-tone multi-frequency (DTMF) decoder that takes one (.wav
+8bits 8KHz) sound and print on standard output all numbers that it contains.
 
 ## Installation
 
