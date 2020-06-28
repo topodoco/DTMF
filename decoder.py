@@ -4,7 +4,7 @@ from pathlib import Path
 import scipy.io.wavfile as wav
 import numpy as np
 import matplotlib.pyplot as plt
-#import time
+
 
 def Print_Graph(filename, title):
     samplerate, data = extract_data(filename)
@@ -27,10 +27,9 @@ def extract_data(filename):
     samplerate, data = wav.read(filename)
     return samplerate, data
 
-def Goertzel(filename, WantedFrequency):
-    samplerate, sample = extract_data(filename)
+def Goertzel(WantedFrequency, sample, samplerate):
     N = len(sample)
-    k = 0.5 + (N * WantedFrequency / samplerate)
+    k = int(0.5 + (N * WantedFrequency / samplerate))
     w = 2 * np.pi * k / N
     cos = np.cos(w)
     sin = np.sin(w)
@@ -52,7 +51,7 @@ def Goertzel(filename, WantedFrequency):
     
     return power
 
-def DTMF(file):
+def DTMF(filename):
     #check for all cases
     print("Extracted numbers :")
     freq_table_1 = np.array([697, 770, 852, 941])
@@ -61,15 +60,28 @@ def DTMF(file):
                                [4, 5, 6, 11],
                                [7, 8, 9, 12],
                                [13, 0, 14, 15]])
-    for i in range(0, 4):
-        if (Goertzel(file, freq_table_1[i]) >= 1):
-            for j in range(0, 4):
-                if (Goertzel(file, freq_table_2[j]) >= 1):
-                    print(f"{freq_num_table[i][j]}")                
+    
+    samplerate, sample = extract_data(filename)
+    
+    begin = 0
+    end = 800
+    
+    nb_blocs = (sample.shape[0] / samplerate) * 1000 / 100
+    sample_bloc = sample[begin : end]
+    
+    for k in range(0, int(nb_blocs)):
+        begin += 800
+        end += 800
+        for i in range(0, 4):
+            if (Goertzel(freq_table_1[i], sample_bloc, samplerate) >= 15):
+                for j in range(0, 4):
+                    if (Goertzel(freq_table_2[j], sample_bloc, samplerate) >= 15):
+                        print(f"{freq_num_table[i][j]}")   
+        sample_bloc = sample[begin : end]
     
     #print the graph
     print("\nGraph Info :")
-    Print_Graph(file, args.Audio_File)
+    Print_Graph(filename, args.Audio_File)
 
 if __name__ == "__main__":
     parser = ArgumentParser(description = "DTMF decoder")
@@ -77,10 +89,10 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    file = Path(args.Audio_File).absolute()
+    filename = Path(args.Audio_File).absolute()
     
     #computation
-    DTMF(file)
+    DTMF(filename)
     
     #freq = 852
     #Goertzel = Goertzel(file, freq)
