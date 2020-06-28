@@ -19,8 +19,8 @@ python decoder.py your_8bit_sound.py
 
 ## Process
 
-J'ai tout d'abord comemncé par faire un main pour prendre des arguments,
-puis je me suis concentré sur la lecture du sons et sa transformation 
+J'ai tout d'abord comemnce par faire un main pour prendre des arguments,
+puis je me suis concentre sur la lecture du sons et sa transformation 
 en graph.
 
 Il me reste desormais � traduire ce son en chiffre,
