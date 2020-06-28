@@ -53,7 +53,6 @@ def Goertzel(WantedFrequency, sample, samplerate):
 
 def DTMF(filename):
     #check for all cases
-    print("Extracted numbers :")
     freq_table_1 = np.array([697, 770, 852, 941])
     freq_table_2 = np.array([1209, 1336, 1477, 1633])
     freq_num_table = np.array([[1, 2, 3, 10],
@@ -78,14 +77,12 @@ def DTMF(filename):
                     if (Goertzel(freq_table_2[j], sample_bloc, samplerate) >= 15):
                         print(f"{freq_num_table[i][j]}")   
         sample_bloc = sample[begin : end]
-    
-    #print the graph
-    print("\nGraph Info :")
-    Print_Graph(filename, args.Audio_File)
 
 if __name__ == "__main__":
     parser = ArgumentParser(description = "DTMF decoder")
     parser.add_argument('Audio_File', help = "need a .wav file")
+    parser.add_argument('-p', '--print', action = "store_true", 
+    help = "print some infos and a graph")
 
     args = parser.parse_args()
 
@@ -94,7 +91,7 @@ if __name__ == "__main__":
     #computation
     DTMF(filename)
     
-    #freq = 852
-    #Goertzel = Goertzel(file, freq)
-    #print("Computation :")
-    #print(f"power = {Goertzel}")
+    #print the graph
+    if args.print:
+        print("\nGraph Info :")
+        Print_Graph(filename, args.Audio_File)

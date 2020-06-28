@@ -5,7 +5,7 @@ This is a Dual-tone multi-frequency (DTMF) decoder that takes one (.wav
 
 ## Installation
 
-there are some required libraries.
+There are some required libraries.
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install 
 requierments.
 
@@ -15,8 +15,17 @@ pip install --user requierments.txt
 
 ## Usage
 
+you can use some options: 
+##### Print(-p or --print)
+##### Help(-p or --print)
+
 ```python
 python decoder.py your_8bit_sound.py
+
+python decoder.py your_8bit_sound.py -p
+python decoder.py your_8bit_sound.py --print
+python decoder.py your_8bit_sound.py -h
+python decoder.py your_8bit_sound.py --help
 ```
 
 ## Process
@@ -32,6 +41,8 @@ the Goertzel algorithm in python (reading on all sound at once)
 On top of this I implemented my DTMF function 
 to split the sound into 100ms chunks and check for all combinasons 
 and print the number stored in a table
+
+I added some options to give in arguments 
 
 ## GitHub
 
