@@ -55,10 +55,10 @@ def DTMF(filename):
     #check for all cases
     freq_table_1 = np.array([697, 770, 852, 941])
     freq_table_2 = np.array([1209, 1336, 1477, 1633])
-    freq_num_table = np.array([[1, 2, 3, 10],
-                               [4, 5, 6, 11],
-                               [7, 8, 9, 12],
-                               [13, 0, 14, 15]])
+    freq_num_table = np.array([[1, 2, 3, "A"],
+                               [4, 5, 6, "B"],
+                               [7, 8, 9, "C"],
+                               ["*", 0, "#", "D"]])
     
     samplerate, sample = extract_data(filename)
     
