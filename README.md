@@ -10,7 +10,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install
 requierments.
 
 ```bash
-pip install --user requierments.txt
+pip install -r requierments.txt
 ```
 
 ## Usage
